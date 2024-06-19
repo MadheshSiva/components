@@ -1,0 +1,56 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+nav a {
+    --none--color : none;
+    --text-color : black;
+    text-decoration: var(--none--color);
+    color: var(--text-color);
+}
+
+select, a {
+    border: none;
+    outline: none;
+    width: 10%;
+}
+
+select:focus, a:focus {
+    outline: none;
+}
+
+button {
+    background: none;
+   
+    border:none;
+}
+
+.disabled {
+    cursor: no-drop;
+    background: #22252a;
+    color: #a8b4bd;
+    padding: 0.3em 1em;
+    box-shadow: 3px 2px 4px #484f57;
+    border-radius: 3px;
+}
+
+.btn{
+    background: #484f57;
+    color: white;
+    padding: 0.3em 1em;
+    border-radius: 3px;
+    box-shadow: 3px 2px 4px #484f57;
+    cursor: pointer;
+}
+
+.btn-custom{
+    background: #484f57;
+    color: white;
+    padding: 0.3em 1em;
+    border-radius: 3px;
+    box-shadow: 3px 2px 4px #484f57;
+    cursor: pointer;
+}
+
+

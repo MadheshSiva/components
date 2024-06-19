@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/home-outline.svg" type="image/svg+xml">
+    <!-- <meta name="color-scheme" content=""> -->
+    <link rel="stylesheet" href="/components.css">
+</head>
+
+<style>
+    .card {
+        padding: 20px;
+        border-radius: 5px;
+        width: 300px;
+        text-align: center;
+    }
+
+    progress {
+        width: 100%;
+        height: 20px;
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .increseBtn {
+        border: 1px solid #22252a;
+        background: #22252a;
+        color: white;
+        border-radius: 3px;
+        box-shadow: 2px 3px 5px #484f57;
+    }
+
+    .decreseBtn {
+        border: 1px solid #22252a;
+        background: #9aa1a9;
+        color: rgb(193, 51, 51);
+        border-radius: 3px;
+        box-shadow: 2px 3px 5px #484f57;
+    }
+
+    #progress-bar {
+        background: #8e9bcc;
+        border-radius: 3px;
+    }
+
+    .message {
+        padding: 10px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        background-color: #f0f0f0;
+    }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 34px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+    input:checked+.slider {
+        background-color: #2196F3;
+    }
+
+    input:checked+.slider:before {
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+    /* Split button styles */
+    .split-button {
+        position: relative;
+        display: inline-block;
+        margin-top: 20px;
+    }
+
+    .split-button>button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+    }
+
+    .split-button .dropdown-button {
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        z-index: 1;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+
+    .show-dropdown {
+        display: block;
+    }
+</style>
+
+<body>
+
+    <nav>
+        <a href="/home/">
+            <span>
+                <img src="/home-outline.svg" alt="home-icon" style="width: 0.9rem;" />
+            </span>
+            <span>
+                Home
+            </span>
+        </a>
+        <span class="crumb-separator" aria-hidden="true">|</span>
+        <span>
+            <select>
+                <option selected>CollectionA</option>
+                <option>CollectionB</option>
+                <option>CollectionC</option>
+            </select>
+        </span>
+
+        <a href="/home/">
+            <span>
+                <img src="/home-outline.svg" alt="home-icon" style="width: 0.9rem;" />
+            </span>
+            <span>
+                Home
+            </span>
+        </a>
+    </nav>
+
+    <button type="submit" class="btn">Submit</button>
+    <button type="button" class="btn">Type Button</button>
+    <button type="reset" class="btn">Reset</button>
+    <button disabled class="disabled">Disabled</button>
+    <button class="btn-custom">Custom</button>
+    <div class="card">
+        <label>
+            <span class="sr-only">Loading progress</span>
+            <progress id="progress-bar" value="0" max="100" role="progressbar" aria-describedby="loading-zone"
+                tabindex="-1">0%</progress>
+        </label>
+        <div class="button-container">
+            <button onclick="increaseProgress()" class="increseBtn">Increase Progress</button>
+            <button onclick="resetProgress()" class="decreseBtn">Reset Progress</button>
+        </div>
+    </div>
+    <label class="switch">
+        <input type="checkbox" checked>
+        <span class="slider round"></span>
+    </label>
+    <div class="split-button">
+        <button id="mainButton">Main Button</button>
+        <button id="dropdownButton" class="dropdown-button" aria-haspopup="true" aria-expanded="false">
+            <span>&#9660;</span>
+        </button>
+        <div id="dropdownContent" class="dropdown-content">
+            <a href="#">Option1</a>
+            <a href="#">Option2</a>
+            <a href="#">Option3</a>
+        </div>
+    </div>
+    <button id="spells">Cast Spell</button>
+    <button id="actions">Mock User Action</button>
+    <div id="message-container" style="width: 5%; margin-left: 5px;"></div>
+
+   
+
+
+    <script>
+        function increaseProgress() {
+            const progressBar = document.getElementById('progress-bar');
+            let currentValue = parseInt(progressBar.value);
+            if (currentValue < 100) {
+                currentValue += 10;
+                progressBar.value = currentValue;
+                progressBar.innerText = `${currentValue}%`;
+            }
+        }
+
+        function resetProgress() {
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.value = 0;
+            progressBar.innerText = '0%';
+        }
+        const messages = ['ice1', 'ice2', 'ice3', 'ice4'];
+
+        document.getElementById('spells').addEventListener('click', function () {
+            showMessage(getRandomMessage());
+        });
+
+        document.getElementById('actions').addEventListener('click', function () {
+            showMessage(getRandomMessage());
+        });
+
+        function getRandomMessage() {
+            const randomIndex = Math.floor(Math.random() * messages.length);
+            return messages[randomIndex];
+        }
+
+        function showMessage(text) {
+            const messageContainer = document.getElementById('message-container');
+            const message = document.createElement('div');
+            message.className = 'message';
+            message.innerText = text;
+            messageContainer.appendChild(message);
+
+            setTimeout(function () {
+                messageContainer.removeChild(message);
+            }, 4000);
+        }
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var dropdownButton = document.getElementById("dropdownButton");
+            var dropdownContent = document.getElementById("dropdownContent");
+
+            dropdownButton.addEventListener("click", function () {
+                dropdownContent.classList.toggle("show-dropdown");
+                var ariaExpanded = dropdownContent.classList.contains("show-dropdown") ? "true" : "false";
+                dropdownButton.setAttribute("aria-expanded", ariaExpanded);
+            });
+
+
+            window.addEventListener("click", function (event) {
+                if (!dropdownButton.contains(event.target)) {
+                    dropdownContent.classList.remove("show-dropdown");
+                    dropdownButton.setAttribute("aria-expanded", "false");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
